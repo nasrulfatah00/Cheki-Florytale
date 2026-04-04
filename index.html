@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kasir Cheki Florytale</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" type="image/jpeg" href="img/ft-icon.png">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div id="setup-screen">
+            <div class="header-setup">
+                <img src="img/ft-logo.png" alt="Logo Florytale" class="ft-logo-header">
+                <h1 class="ft-title ft-title-setup">Kasir Cheki Florytale</h1>
+            </div>
+            
+            <form class="setup-form" onsubmit="event.preventDefault(); startEvent();">
+                <label for="input-event" class="ft-label">Nama Event:</label>
+                <input type="text" id="input-event" placeholder="Contoh: Comic Paradise Jogja" class="ft-input">
+                <button type="submit" class="btn-utama ft-btn-pink">Mulai Sesi Kasir</button>
+            </form>
+        </div>
+
+        <div id="cashier-screen" style="display: none;">
+            <div class="header-kasir">
+                <div class="header-ft-branding">
+                    <img src="img/ft-logo.png" alt="Logo Florytale" class="ft-logo-casher">
+                    <h2 class="ft-title ft-title-casher">Cheki Order</h2>
+                </div>
+                <div class="header-event-info">
+                    <span class="event-badge">
+                        <small>Event Aktif:</small><br>
+                        <strong id="display-event"></strong>
+                    </span>
+                    <button class="btn-reset" onclick="resetEvent()">Ganti Event</button>
+                </div>
+            </div>
+
+            <form id="form-transaksi">
+                <div class="form-layout">
+                    
+                    <div class="left-panel">
+                        <label for="customer" class="ft-label">Nama Customer:</label>
+                        <input type="text" id="customer" name="nama_customer" placeholder="Ketik nama customer..." class="ft-input" required>
+
+                        <label class="ft-label ft-select-members-title">Select Members</label>
+                        <div class="member-grid" id="member-container">
+                            </div>
+                    </div>
+
+                    <div class="right-panel">
+                        <div class="summary-card">
+                            <h3 class="ft-title ft-title-summary">Order Summary</h3>
+                            <div class="summary-box">
+                                <div class="summary-header">
+                                    <span class="printer-icon">🧾</span> Rincian Order
+                                </div>
+                                <div id="summary-items">
+                                    <div class="empty-state">Belum ada member yang dipilih</div>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-total">
+                                    <span>Total:</span>
+                                    <span class="total-price" id="total-price">Rp 0</span>
+                                </div>
+                            </div>
+
+                            <label class="ft-label ft-payment-title">Metode Pembayaran:</label>
+                            <div class="payment-grid">
+                                <input type="radio" id="pay1" name="pembayaran" value="Tunai" required>
+                                <label for="pay1" class="pay-btn pay-btn-tunai">
+                                    <img src="img/icon-tunai.png" alt="Tunai" class="pay-icon">
+                                    Tunai
+                                </label>
+
+                                <input type="radio" id="pay2" name="pembayaran" value="QRIS">
+                                <label for="pay2" class="pay-btn pay-btn-qris">
+                                    <img src="img/icon-qris.png" alt="QRIS" class="pay-icon">
+                                    QRIS
+                                </label>
+                            </div>
+
+                            <label for="catatan" class="ft-label ft-catatan-title">Catatan (Opsional):</label>
+                            <textarea name="catatan" id="catatan" placeholder="Pose lucu, pose keren, atau pembayaran campur..." class="ft-input ft-textarea"></textarea>
+
+                            <button type="submit" id="btn-submit" class="btn-utama ft-btn-pink btn-proses-order">Proses Order</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

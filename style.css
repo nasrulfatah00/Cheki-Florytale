@@ -1,0 +1,219 @@
+:root {
+    --primary: #ff6b9e; /* Pink khas Florytale */
+    --primary-light: #fff0f5; /* Merah muda pucat */
+    --bg: #fdfafb;
+    --card-bg: #ffffff;
+    --text: #333333;
+    --border: #eaebec;
+    --font-fredoka: 'Fredoka One', cursive; /* Definisi font global */
+}
+
+/* Pengaturan Global & Fredoka Font */
+body {
+    font-family: var(--font-fredoka);
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0; padding: 15px;
+    display: flex; justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container { width: 100%; max-width: 950px; }
+
+/* Font Style untuk Semua Judul & Tombol */
+.ft-title, .btn-utama, .btn-reset, .counter-btn, .counter-val, .total-price, .pay-btn, .ft-label {
+    font-family: var(--font-fredoka);
+}
+
+/* Input Fields & Textarea dengan Fredoka */
+.ft-input, .ft-textarea {
+    font-family: var(--font-fredoka);
+    width: 100%; padding: 12px; box-sizing: border-box;
+    border: 2px solid var(--border); border-radius: 8px;
+    font-size: 14px; color: #555;
+    transition: 0.2s;
+}
+
+.ft-input:focus, .ft-textarea:focus {
+    border-color: var(--primary); outline: none;
+}
+
+.ft-input::placeholder, .ft-textarea::placeholder {
+    font-family: var(--font-fredoka); color: #999;
+}
+
+/* Tombol Pink Florytale */
+.btn-utama.ft-btn-pink {
+    width: 100%; padding: 16px; background: var(--primary);
+    color: white; border: none; border-radius: 12px;
+    font-size: 16px; font-weight: bold; cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 107, 158, 0.3); transition: 0.2s;
+}
+
+.btn-utama.ft-btn-pink:active { transform: scale(0.98); box-shadow: 0 2px 5px rgba(255, 107, 158, 0.2); }
+
+/* =====================================================================
+   HALAMAN SETUP EVENT VISUAL MENARIK
+   ===================================================================== */
+#setup-screen { text-align: center; padding: 50px 0; }
+.header-setup { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+.ft-logo-header { width: 200px; max-width: 80%; margin-bottom: 15px; }
+.ft-title-setup { font-size: 24px; color: #333; margin: 0; }
+.ft-label { font-size: 14px; margin-bottom: 8px; color: #555; }
+.setup-form .ft-input { max-width: 400px; margin-bottom: 20px; text-align: center;}
+
+/* =====================================================================
+   HALAMAN KASIR VISUAL MENARIK
+   ===================================================================== */
+.header-kasir {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding: 10px; background: var(--card-bg);
+    border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.header-ft-branding { display: flex; align-items: center; gap: 10px; }
+.ft-logo-casher { width: 40px; }
+.ft-title-casher { font-size: 20px; color: #333; margin: 0; }
+
+.header-event-info { display: flex; gap: 10px; align-items: center; text-align: right; }
+.event-badge { font-size: 12px; color: #666; }
+.event-badge strong { color: var(--primary); font-size: 15px; }
+.btn-reset {
+    background: transparent; color: var(--primary); border: 1px solid var(--primary);
+    padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer;
+}
+
+/* Grid Member Visual Menarik (Seperti image_0.png) */
+.left-panel .ft-label { margin-top: 15px; margin-bottom: 5px; color: #333; font-size: 15px; }
+.left-panel .ft-select-members-title { margin-top: 25px; margin-bottom: 10px; color: #333; font-size: 16px;}
+.member-grid { 
+    display: grid; gap: 15px; margin-top: 10px;
+    grid-template-columns: repeat(2, 1fr); /* Default HP: 2 kolom */
+}
+
+.member-card {
+    background: var(--card-bg); border-radius: 12px; text-align: center;
+    position: relative; padding-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.member-card img {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+    object-position: top; border-radius: 12px 12px 0 0;
+}
+
+.member-name { font-weight: bold; font-size: 13px; margin: 8px 0; color: #333; }
+
+/* Checkmark Merah (Seperti image_0.png) */
+.checkmark {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--primary); color: white; width: 24px; height: 24px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: none;
+}
+.member-card.selected .checkmark { display: flex; }
+
+/* Tombol Counter dengan Fredoka (Seperti image_0.png) */
+.counter-box {
+    display: flex; justify-content: center; gap: 10px; align-items: center;
+    background: #f4f5f7; border-radius: 8px; margin: 0 10px; padding: 4px;
+}
+.counter-btn {
+    background: none; border: none; font-size: 20px; color: var(--primary); cursor: pointer;
+    font-family: var(--font-fredoka);
+}
+.counter-val { font-weight: bold; font-size: 14px; min-width: 15px; color: #333; }
+
+/* =====================================================================
+   ORDER SUMMARY PANEL KANAN (Seperti image_1.png)
+   ===================================================================== */
+.right-panel .summary-card {
+    background: var(--card-bg); border-radius: 16px; padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 15px;
+}
+
+.ft-title-summary { font-size: 18px; color: var(--primary); margin-top: 0; margin-bottom: 15px; text-align: center;}
+
+.summary-box { border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 20px; }
+.summary-header { font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; color: #333; font-size: 15px;}
+.printer-icon { font-size: 16px; }
+
+.summary-item {
+    display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: #555;
+    font-family: var(--font-fredoka);
+}
+
+.summary-divider { border-top: 1px dashed #ccc; margin: 15px 0; }
+.summary-total {
+    display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; color: #333;
+    font-family: var(--font-fredoka);
+}
+.total-price { color: var(--primary); font-size: 20px; }
+.empty-state { text-align: center; font-size: 13px; color: #999; font-style: italic; }
+
+/* Metode Pembayaran Visual (Cards dengan Icons) */
+.right-panel .ft-payment-title { margin-top: 10px; margin-bottom: 8px; color: #333; font-size: 15px;}
+.payment-grid { display: flex; gap: 10px; }
+.payment-grid input[type="radio"] { display: none; }
+.pay-btn {
+    flex: 1; text-align: center; padding: 15px 10px; background: var(--card-bg);
+    border: 2px solid var(--border); border-radius: 10px; font-weight: bold; cursor: pointer;
+    transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 5px;
+    font-size: 13px; color: #555;
+}
+.pay-icon { width: 30px; margin-bottom: 5px; }
+
+input[type="radio"]:checked + .pay-btn {
+    border-color: var(--primary); background: var(--primary-light); color: var(--primary);
+}
+
+/* Bidang Catatan */
+.right-panel .ft-catatan-title { margin-top: 15px; margin-bottom: 5px; color: #333; font-size: 15px; }
+.ft-textarea { resize: vertical; min-height: 80px; }
+
+/* Tombol Proses Order */
+.btn-proses-order { margin-top: 20px; }
+
+/* =====================================================================
+   CASSIE & GROUP LAYOUT HANDLERS
+   ===================================================================== */
+#card-cassie { display: none; } /* Default Sembunyi */
+
+/* =====================================================================
+   TATA LETAK RESPONSIVE (LAPTOP & PONSEL)
+   ===================================================================== */
+
+/* 1. LAYAR LAPTOP / TABLET (LANDSCAPE) -image_2.png */
+@media (min-width: 768px) {
+    .app-container { max-width: 950px; }
+    .form-layout { display: flex; gap: 30px; align-items: flex-start; }
+    .left-panel { flex: 1.6; }
+    .right-panel { flex: 1; position: sticky; top: 15px; }
+    .member-grid { grid-template-columns: repeat(3, 1fr); }
+    
+    /* Posisi Khusus Grid 3 Kolom */
+    #card-cassie { grid-column: 1; grid-row: 3; } /* Kiri bawah */
+    #card-group  { grid-column: 2; grid-row: 3; } /* Tengah bawah */
+}
+
+/* 2. LAYAR HP (PORTRAIT) */
+@media (max-width: 767px) {
+    .app-container { max-width: 100%; }
+    .form-layout { display: block; }
+    .member-grid { grid-template-columns: repeat(2, 1fr); }
+
+    #card-group {
+        grid-column: 1 / -1; /* Mengambil ruang penuh / span 2 kolom */
+        justify-self: center; /* Dipusatkan */
+        width: 60%; /* Tidak terlalu lebar */
+    }
+
+    /* Aturan saat cassie diaktifkan di HP, group membaur ke kanan */
+    body.cassie-active #card-group {
+        grid-column: 2; width: 100%;
+    }
+}
+
+/* KELAS UNTUK MENAMPILKAN CASSIE */
+body.cassie-active #card-cassie { display: block; }
