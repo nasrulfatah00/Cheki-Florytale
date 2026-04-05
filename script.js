@@ -1,7 +1,10 @@
 // =================================================================================
-// SAKLAR CASSIE (ON/OFF)
-// Ubah menjadi 'true' jika Cassie hadir di event.
+// KONFIGURASI KEAMANAN & SAKLAR
 // =================================================================================
+// 1. Ganti tulisan di dalam tanda kutip ini dengan PIN/Password yang kamu mau!
+const PASSWORD_KASIR = "adminchekift123"; 
+
+// 2. Ubah menjadi 'true' jika Cassie hadir di event.
 const isCassieActive = false; 
 if (isCassieActive) { document.body.classList.add('cassie-active'); }
 // =================================================================================
@@ -9,7 +12,7 @@ if (isCassieActive) { document.body.classList.add('cassie-active'); }
 // GANTI DENGAN URL WEB APP APPS SCRIPT KAMU
 const scriptURL = 'https://script.google.com/macros/s/AKfycbyq0a5uoGHu6OAldX7tZpMZ1ghxlLA9jQb8KokT3XtW09q2zuNPiIozMEbThrk_jIMx2Q/exec'; 
 
-// KONFIGURASI MEMBER & HARGA (Seperti image_0.png & image_4.png)
+// KONFIGURASI MEMBER & HARGA
 const catalog = [
     { id: 'devi', name: 'Devi', price: 30000, img: 'img/devi.jpg' },
     { id: 'risma', name: 'Risma', price: 30000, img: 'img/risma.jpg' },
@@ -17,7 +20,7 @@ const catalog = [
     { id: 'ziella', name: 'Ziella', price: 30000, img: 'img/ziella.jpg' },
     { id: 'caca', name: 'Caca', price: 30000, img: 'img/caca.jpg' },
     { id: 'diva', name: 'Diva', price: 30000, img: 'img/diva.jpg' },
-    { id: 'cassie', name: 'Cassie', price: 30000, img: 'img/cassie.jpg' }, // Sembunyikan Cassie default
+    { id: 'cassie', name: 'Cassie', price: 30000, img: 'img/cassie.jpg' },
     { id: 'group', name: 'Group', price: 35000, img: 'img/group.jpg' }
 ];
 
@@ -28,7 +31,7 @@ const formatRp = (num) => new Intl.NumberFormat('id-ID', { style: 'currency', cu
 // Generate Card Member dengan Fredoka Font
 const container = document.getElementById('member-container');
 catalog.forEach(item => {
-    cart[item.id] = 0; // Default qty 0
+    cart[item.id] = 0; 
     const card = document.createElement('div');
     card.className = 'member-card';
     card.id = `card-${item.id}`;
@@ -59,7 +62,6 @@ function updateQty(id, change) {
     }
 }
 
-// === RENDER SUMMARY DENGAN HARGA TOTAL PINK BESAR (Seperti image_1.png) ===
 function renderSummary() {
     const summaryContainer = document.getElementById('summary-items');
     const totalDisplay = document.getElementById('total-price');
@@ -91,13 +93,57 @@ function renderSummary() {
     document.getElementById('form-transaksi').dataset.total = grandTotal;
 }
 
-// === LOGIKA EVENT SETUP ===
+// === LOGIKA ROUTING (LOGIN -> SETUP -> KASIR) ===
 window.onload = () => {
-    const savedEvent = localStorage.getItem('activeEvent');
-    if (savedEvent) {
-        showCashier(savedEvent);
+    // Cek apakah perangkat sudah pernah login
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+    if (isLoggedIn === 'true') {
+        // Jika sudah login, sembunyikan layar login
+        document.getElementById('login-screen').style.display = 'none';
+        
+        // Cek apakah event sudah diset
+        const savedEvent = localStorage.getItem('activeEvent');
+        if (savedEvent) {
+            showCashier(savedEvent);
+        } else {
+            // Jika belum ada event, munculkan setup event
+            document.getElementById('setup-screen').style.display = 'block';
+        }
     }
+    // Jika belum login, biarkan login-screen tampil secara default
 };
+
+function loginKasir() {
+    const inputPass = document.getElementById('input-password').value;
+    
+    if (inputPass === PASSWORD_KASIR) {
+        // Tandai sebagai login di memori HP
+        localStorage.setItem('isLoggedIn', 'true');
+        
+        // Sembunyikan layar login
+        document.getElementById('login-screen').style.display = 'none';
+        
+        // Arahkan ke layar setup atau kasir
+        const savedEvent = localStorage.getItem('activeEvent');
+        if (savedEvent) {
+            showCashier(savedEvent);
+        } else {
+            document.getElementById('setup-screen').style.display = 'block';
+        }
+    } else {
+        alert("PIN / Password Salah!");
+        document.getElementById('input-password').value = ''; // Kosongkan kolom
+    }
+}
+
+function logoutKasir() {
+    if (confirm("Yakin ingin keluar (logout) dari sistem kasir?")) {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('activeEvent');
+        location.reload(); // Refresh akan mengembalikan ke layar login
+    }
+}
 
 function startEvent() {
     const eventName = document.getElementById('input-event').value;
@@ -116,7 +162,7 @@ function showCashier(name) {
 }
 
 function resetEvent() {
-    if (confirm("Ganti sesi event?")) {
+    if (confirm("Ganti sesi event? Data event saat ini akan ditutup dari layar kasir.")) {
         localStorage.removeItem('activeEvent');
         location.reload(); 
     }
@@ -132,7 +178,6 @@ document.getElementById('form-transaksi').addEventListener('submit', e => {
     btn.innerText = "Mengirim...";
     btn.disabled = true;
 
-    // Reka teks Rincian Order untuk dikirim ke Sheet
     let rincianText = [];
     catalog.forEach(item => {
         if(cart[item.id] > 0) { rincianText.push(`${item.name} (x${cart[item.id]})`); }
@@ -145,12 +190,31 @@ document.getElementById('form-transaksi').addEventListener('submit', e => {
 
     fetch(scriptURL, { method: 'POST', body: formData })
     .then(response => {
-        alert('Tersimpan ke Google Sheets!');
-        location.reload(); // Refresh untuk antrean selanjutnya
+        document.getElementById('form-transaksi').reset();
+        catalog.forEach(item => {
+            cart[item.id] = 0;
+            document.getElementById(`qty-${item.id}`).innerText = 0;
+            document.getElementById(`card-${item.id}`).classList.remove('selected');
+        });
+        renderSummary();
+
+        document.getElementById('cashier-screen').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        window.scrollTo(0, 0);
+
+        btn.disabled = false;
+        btn.innerText = "Proses Order";
     })
     .catch(error => {
-        alert('Gagal! Periksa koneksi.');
+        alert('Gagal! Periksa koneksi internet.');
         btn.disabled = false;
         btn.innerText = "Proses Order";
     });
 });
+
+// === FUNGSI KEMBALI DARI LAYAR SUKSES ===
+function backToForm() {
+    document.getElementById('success-screen').style.display = 'none';
+    document.getElementById('cashier-screen').style.display = 'block';
+    document.getElementById('customer').focus(); 
+}
