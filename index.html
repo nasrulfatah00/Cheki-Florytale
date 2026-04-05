@@ -17,7 +17,22 @@
 
     <div class="app-container">
         
-        <div id="setup-screen">
+        <!-- LAYAR 0: LOGIN KASIR (Baru ditambahkan) -->
+        <div id="login-screen">
+            <div class="header-setup">
+                <img src="img/ft-logo.png" alt="Logo Florytale" class="ft-logo-header">
+                <h1 class="ft-title ft-title-setup">Login Manajemen</h1>
+            </div>
+            
+            <form class="setup-form" onsubmit="event.preventDefault(); loginKasir();">
+                <label for="input-password" class="ft-label">PIN / Password Akses:</label>
+                <input type="password" id="input-password" placeholder="Masukkan kata sandi..." class="ft-input" required>
+                <button type="submit" class="btn-utama ft-btn-pink" style="margin-top: 15px;">Masuk Sistem</button>
+            </form>
+        </div>
+
+        <!-- LAYAR 1: SETUP EVENT (Sekarang disembunyikan secara default) -->
+        <div id="setup-screen" style="display: none;">
             <div class="header-setup">
                 <img src="img/ft-logo.png" alt="Logo Florytale" class="ft-logo-header">
                 <h1 class="ft-title ft-title-setup">Kasir Cheki Florytale</h1>
@@ -30,6 +45,7 @@
             </form>
         </div>
 
+        <!-- LAYAR 2: KASIR TRANSAKSI -->
         <div id="cashier-screen" style="display: none;">
             <div class="header-kasir">
                 <div class="header-ft-branding">
@@ -41,7 +57,10 @@
                         <small>Event Aktif:</small><br>
                         <strong id="display-event"></strong>
                     </span>
-                    <button class="btn-reset" onclick="resetEvent()">Ganti Event</button>
+                    <div style="margin-top: 5px;">
+                        <button class="btn-reset" onclick="resetEvent()">Ganti Event</button>
+                        <button class="btn-reset" onclick="logoutKasir()" style="border-color: #999; color: #999; margin-left: 5px;">Logout</button>
+                    </div>
                 </div>
             </div>
 
@@ -98,6 +117,18 @@
                 </div>
             </form>
         </div>
+
+        <!-- LAYAR 3: SUKSES TRANSAKSI -->
+        <div id="success-screen" style="display: none; text-align: center; padding: 60px 20px;">
+            <div style="font-size: 80px; margin-bottom: 20px;">🎉</div>
+            <h2 class="ft-title" style="color: var(--primary); margin-bottom: 10px;">Order Berhasil!</h2>
+            <p class="ft-label" style="font-size: 16px; margin-bottom: 30px;">Data cheki sudah tercatat di Google Sheets.</p>
+            
+            <button onclick="backToForm()" class="btn-utama ft-btn-pink" style="max-width: 300px; margin: 0 auto;">
+                Kembali ke Kasir
+            </button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
