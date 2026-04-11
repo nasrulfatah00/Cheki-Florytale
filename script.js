@@ -2,7 +2,7 @@
 // KONFIGURASI KEAMANAN & SAKLAR
 // =================================================================================
 // 1. Ganti tulisan di dalam tanda kutip ini dengan PIN/Password yang kamu mau!
-const PASSWORD_KASIR = "chekift123"; 
+const PASSWORD_KASIR = "admincheki123"; 
 
 // 2. Ubah menjadi 'true' jika Cassie hadir di event.
 const isCassieActive = false; 
