@@ -56,7 +56,7 @@ body {
 /* =====================================================================
    HALAMAN SETUP EVENT VISUAL MENARIK
    ===================================================================== */
-#setup-screen { text-align: center; padding: 50px 0; }
+#setup-screen, #login-screen { text-align: center; padding: 50px 0; }
 .header-setup { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
 .ft-logo-header { width: 200px; max-width: 80%; margin-bottom: 15px; }
 .ft-title-setup { font-size: 24px; color: #333; margin: 0; }
@@ -76,15 +76,15 @@ body {
 .ft-logo-casher { width: 40px; }
 .ft-title-casher { font-size: 20px; color: #333; margin: 0; }
 
-.header-event-info { display: flex; gap: 10px; align-items: center; text-align: right; }
-.event-badge { font-size: 12px; color: #666; }
+.header-event-info { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+.event-badge { font-size: 12px; color: #666; margin-bottom: 5px;}
 .event-badge strong { color: var(--primary); font-size: 15px; }
 .btn-reset {
     background: transparent; color: var(--primary); border: 1px solid var(--primary);
     padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer;
 }
 
-/* Grid Member Visual Menarik (Seperti image_0.png) */
+/* Grid Member Visual Menarik */
 .left-panel .ft-label { margin-top: 15px; margin-bottom: 5px; color: #333; font-size: 15px; }
 .left-panel .ft-select-members-title { margin-top: 25px; margin-bottom: 10px; color: #333; font-size: 16px;}
 .member-grid { 
@@ -104,7 +104,7 @@ body {
 
 .member-name { font-weight: bold; font-size: 13px; margin: 8px 0; color: #333; }
 
-/* Checkmark Merah (Seperti image_0.png) */
+/* Checkmark Merah */
 .checkmark {
     position: absolute; top: 10px; right: 10px;
     background: var(--primary); color: white; width: 24px; height: 24px;
@@ -114,7 +114,7 @@ body {
 }
 .member-card.selected .checkmark { display: flex; }
 
-/* Tombol Counter dengan Fredoka (Seperti image_0.png) */
+/* Tombol Counter dengan Fredoka */
 .counter-box {
     display: flex; justify-content: center; gap: 10px; align-items: center;
     background: #f4f5f7; border-radius: 8px; margin: 0 10px; padding: 4px;
@@ -126,7 +126,7 @@ body {
 .counter-val { font-weight: bold; font-size: 14px; min-width: 15px; color: #333; }
 
 /* =====================================================================
-   ORDER SUMMARY PANEL KANAN (Seperti image_1.png)
+   ORDER SUMMARY PANEL KANAN
    ===================================================================== */
 .right-panel .summary-card {
     background: var(--card-bg); border-radius: 16px; padding: 20px;
@@ -176,44 +176,25 @@ input[type="radio"]:checked + .pay-btn {
 .btn-proses-order { margin-top: 20px; }
 
 /* =====================================================================
-   CASSIE & GROUP LAYOUT HANDLERS
-   ===================================================================== */
-#card-cassie { display: none; } /* Default Sembunyi */
-
-/* =====================================================================
    TATA LETAK RESPONSIVE (LAPTOP & PONSEL)
    ===================================================================== */
 
-/* 1. LAYAR LAPTOP / TABLET (LANDSCAPE) -image_2.png */
+/* 1. LAYAR LAPTOP / TABLET (LANDSCAPE) */
 @media (min-width: 768px) {
     .app-container { max-width: 950px; }
     .form-layout { display: flex; gap: 30px; align-items: flex-start; }
     .left-panel { flex: 1.6; }
     .right-panel { flex: 1; position: sticky; top: 15px; }
-    .member-grid { grid-template-columns: repeat(3, 1fr); }
     
-    /* Posisi Khusus Grid 3 Kolom */
-    #card-cassie { grid-column: 1; grid-row: 3; } /* Kiri bawah */
-    #card-group  { grid-column: 2; grid-row: 3; } /* Tengah bawah */
+    /* Otomatis membagi 6 member menjadi 2 baris dan 3 kolom yang presisi */
+    .member-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* 2. LAYAR HP (PORTRAIT) */
 @media (max-width: 767px) {
     .app-container { max-width: 100%; }
     .form-layout { display: block; }
+    
+    /* Di HP otomatis menyesuaikan menjadi 2 kolom (3 baris) */
     .member-grid { grid-template-columns: repeat(2, 1fr); }
-
-    #card-group {
-        grid-column: 1 / -1; /* Mengambil ruang penuh / span 2 kolom */
-        justify-self: center; /* Dipusatkan */
-        width: 60%; /* Tidak terlalu lebar */
-    }
-
-    /* Aturan saat cassie diaktifkan di HP, group membaur ke kanan */
-    body.cassie-active #card-group {
-        grid-column: 2; width: 100%;
-    }
 }
-
-/* KELAS UNTUK MENAMPILKAN CASSIE */
-body.cassie-active #card-cassie { display: block; }
