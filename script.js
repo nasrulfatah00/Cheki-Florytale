@@ -12,7 +12,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbyq0a5uoGHu6OAldX7tZp
 // =================================================================================
 const catalog = [
     { id: 'devi', name: 'Devi', price: 30000, img: 'img/devi.jpg' },
-    { id: 'risma', name: 'Risma', price: 30000, img: 'img/risma.jpg' },
+    { id: 'caca', name: 'Caca', price: 30000, img: 'img/caca.jpg' },
     { id: 'tiara', name: 'Tiara', price: 30000, img: 'img/tiara.jpg' },
     { id: 'cassie', name: 'Cassie', price: 30000, img: 'img/cassie.jpg' },
     { id: 'jessie', name: 'Jessie', price: 30000, img: 'img/jessie.jpg' }, // Member Baru
