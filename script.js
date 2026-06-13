@@ -5,7 +5,7 @@
 const PASSWORD_KASIR = "admincheki123"; 
 
 // 2. Ubah menjadi 'true' jika Cassie hadir di event.
-const isCassieActive = false; 
+const isCassieActive = true; 
 if (isCassieActive) { document.body.classList.add('cassie-active'); }
 // =================================================================================
 
