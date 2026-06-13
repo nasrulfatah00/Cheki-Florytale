@@ -1,27 +1,22 @@
 // =================================================================================
-// KONFIGURASI KEAMANAN & SAKLAR
+// KONFIGURASI KEAMANAN
 // =================================================================================
-// 1. Ganti tulisan di dalam tanda kutip ini dengan PIN/Password yang kamu mau!
+// Ganti tulisan di dalam tanda kutip ini dengan PIN/Password yang kamu mau!
 const PASSWORD_KASIR = "admincheki123"; 
-
-// 2. Ubah menjadi 'true' jika Cassie hadir di event.
-const isCassieActive = true; 
-if (isCassieActive) { document.body.classList.add('cassie-active'); }
-// =================================================================================
 
 // GANTI DENGAN URL WEB APP APPS SCRIPT KAMU
 const scriptURL = 'https://script.google.com/macros/s/AKfycbyq0a5uoGHu6OAldX7tZpMZ1ghxlLA9jQb8KokT3XtW09q2zuNPiIozMEbThrk_jIMx2Q/exec'; 
 
-// KONFIGURASI MEMBER & HARGA
+// =================================================================================
+// KONFIGURASI MEMBER & HARGA (Lineup Baru: Format 3-3)
+// =================================================================================
 const catalog = [
     { id: 'devi', name: 'Devi', price: 30000, img: 'img/devi.jpg' },
     { id: 'risma', name: 'Risma', price: 30000, img: 'img/risma.jpg' },
     { id: 'tiara', name: 'Tiara', price: 30000, img: 'img/tiara.jpg' },
-    { id: 'ziella', name: 'Ziella', price: 30000, img: 'img/ziella.jpg' },
-    { id: 'caca', name: 'Caca', price: 30000, img: 'img/caca.jpg' },
-    { id: 'diva', name: 'Diva', price: 30000, img: 'img/diva.jpg' },
     { id: 'cassie', name: 'Cassie', price: 30000, img: 'img/cassie.jpg' },
-    { id: 'group', name: 'Group', price: 35000, img: 'img/group.jpg' }
+    { id: 'jessie', name: 'Jessie', price: 30000, img: 'img/jessie.jpg' }, // Member Baru
+    { id: 'allmember', name: 'All Member', price: 35000, img: 'img/allmember.jpg' } // Ubah nama file jika perlu
 ];
 
 let cart = {};
