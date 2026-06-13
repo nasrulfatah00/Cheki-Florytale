@@ -16,7 +16,7 @@ const catalog = [
     { id: 'tiara', name: 'Tiara', price: 30000, img: 'img/tiara.jpg' },
     { id: 'cassie', name: 'Cassie', price: 30000, img: 'img/cassie.jpg' },
     { id: 'jessie', name: 'Jessie', price: 30000, img: 'img/jessie.jpg' }, // Member Baru
-    { id: 'allmember', name: 'All Member', price: 35000, img: 'img/allmember.jpg' } // Ubah nama file jika perlu
+    { id: 'allmember', name: 'All Member', price: 35000, img: 'img/group.jpg' } // Ubah nama file jika perlu
 ];
 
 let cart = {};
